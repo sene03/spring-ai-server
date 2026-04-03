@@ -44,4 +44,4 @@ CLAUDE.md
 .env
 .DS_Store
 docs/
-resources/
+/resource_files
