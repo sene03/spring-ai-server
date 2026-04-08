@@ -6,11 +6,6 @@ services:
       - "6334:6334"
     volumes:
       - qdrant_storage:/qdrant/storage
-    healthcheck:
-      test: ["CMD-SHELL", "wget -qO- http://localhost:6333/healthz || exit 1"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
 
   app:
     build:
@@ -23,8 +18,7 @@ services:
       - SPRING_AI_VECTORSTORE_QDRANT_HOST=qdrant
       - SPRING_AI_VECTORSTORE_QDRANT_PORT=6334
     depends_on:
-      qdrant:
-        condition: service_healthy
+      - qdrant
     restart: on-failure
 
 volumes:
